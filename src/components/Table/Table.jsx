@@ -7,17 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
+import { useState } from "react";
+import { useEffect } from "react";
 
-function createData(name, trackingId, date, status) {
-    return { name, trackingId, date, status };
-}
-
-const rows = [
-    createData("Lasania Chiken Fri", 18908424, "2 March 2022", "Approved"),
-    createData("Big Baza Bang ", 18908424, "2 March 2022", "Pending"),
-    createData("Mouth Freshner", 18908424, "2 March 2022", "Approved"),
-    createData("Cupcake", 18908421, "2 March 2022", "Delivered"),
-];
 
 
 const makeStyle = (status) => {
@@ -42,37 +34,49 @@ const makeStyle = (status) => {
 }
 
 export default function BasicTable() {
+
+    const [transactions, setTransactions] = useState({})
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = () => {
+        fetch('https://uber-food-clone-a209f-default-rtdb.firebaseio.com/transaction.json').then((res) => res.json()).then(json => setTransactions(json));
+    }
+
+
+
     return (
         <div className="Table">
             <h3>Recent Orders</h3>
             <TableContainer
                 component={Paper}
-                style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
+                style={{ boxShadow: "0px 13px 20px 0px #80808029", }}
             >
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Product</TableCell>
-                            <TableCell align="left">Tracking ID</TableCell>
-                            <TableCell align="left">Date</TableCell>
-                            <TableCell align="left">Status</TableCell>
-                            <TableCell align="left"></TableCell>
+                            <TableCell>Restaurant</TableCell>
+                            <TableCell>Products</TableCell>
+                            <TableCell align="left">Type</TableCell>
+                            <TableCell align="left">Total Price</TableCell>
+                            <TableCell align="left">Email</TableCell>
+                            <TableCell align="left">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody style={{ color: "white" }}>
-                        {rows.map((row) => (
+                        {Object.keys(transactions).map((id) => (
                             <TableRow
-                                key={row.name}
+                                key={id}
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {transactions[id].restaurantName}
                                 </TableCell>
-                                <TableCell align="left">{row.trackingId}</TableCell>
-                                <TableCell align="left">{row.date}</TableCell>
-                                <TableCell align="left">
-                                    <span className="status" style={makeStyle(row.status)}>{row.status}</span>
-                                </TableCell>
+                                <TableCell align="left">{transactions[id].items.map(i => <p>{i.title} {i.quantity}x - ${i.price} </p>)}</TableCell>
+                                <TableCell align="left">{transactions[id].type}</TableCell>
+                                <TableCell align="left">{transactions[id].totalPrice}</TableCell>
+                                <TableCell align="left">{transactions[id].user}</TableCell>
                                 <TableCell align="left" className="Details">Details</TableCell>
                             </TableRow>
                         ))}

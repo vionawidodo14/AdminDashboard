@@ -1,8 +1,9 @@
 .MainDash {
     /* padding-top: 1rem; */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-evenly; */
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 1200px) {
