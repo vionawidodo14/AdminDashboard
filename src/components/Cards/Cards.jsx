@@ -3,10 +3,14 @@ import "./Cards.css";
 import { cardsData } from "../../Data/Data";
 
 import Card from "../Card/Card";
+import SalesCard from "../Card/SalesCard";
 
 const Cards = () => {
     return (
         <div className="Cards">
+            <div className="parentContainer" >
+                <SalesCard />
+            </div>
             {cardsData.map((card, id) => {
                 return (
                     <div className="parentContainer" key={id}>

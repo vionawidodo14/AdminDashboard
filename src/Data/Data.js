@@ -55,7 +55,7 @@ export const cardsData = [
         series: [
             {
                 name: "Sales",
-                data: [31, 40, 28, 51, 42, 109, 100],
+                data: [1, 1, 2, 1, 1, 1, 1, 1],
             },
         ],
     },
