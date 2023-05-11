@@ -11,12 +11,12 @@ import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
 // parent Card
 
 
-const SalesCard = () => {
+const RevenueCard = () => {
   const [props, setProps] = useState({
-    title: "Sales",
+    title: "Revenue",
     color: {
-      backGround: "linear-gradient(180deg, #bb67ff 0%, #c484f3 100%)",
-      boxShadow: "0px 10px 20px 0px #e0c6f5",
+      backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
+      boxShadow: "0px 10px 20px 0px #FDC0C7",
     },
     barValue: 70,
     value: "25,970",
@@ -71,7 +71,7 @@ const SalesCard = () => {
   const [expanded, setExpanded] = useState(false);
   const [total, setTotal] = useState(0)
   const [series, setSeries] = useState([{
-    name: "Sales",
+    name: "Revenue",
     data: [],
   }])
   useEffect(() => {
@@ -88,7 +88,15 @@ const SalesCard = () => {
       })
 
       const dates = [...new Set(allDates)]
-      const seriesData = dates.map(item => Object.keys(json).filter(id => json[id].date == item).length)
+      let seriesData = dates.map(item => Object.keys(json).filter(id => json[id].date == item))
+
+      seriesData = seriesData.map(i => {
+        let total = 0
+        for (const item of i) {
+          total += json[item].totalPrice
+        }
+        return total
+      })
 
       let tot = 0
       for (const item of seriesData) {
@@ -173,4 +181,4 @@ function ExpandedCard({ param, setExpanded, options, series }) {
   );
 }
 
-export default SalesCard;
+export default RevenueCard;

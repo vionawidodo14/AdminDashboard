@@ -67,7 +67,7 @@ export const cardsData = [
         },
         barValue: 80,
         value: "14,270",
-        png: UilMoneyWithdrawal,
+        png: UilUsdSquare,
         series: [
             {
                 name: "Revenue",

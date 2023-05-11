@@ -4,6 +4,7 @@ import { cardsData } from "../../Data/Data";
 
 import Card from "../Card/Card";
 import SalesCard from "../Card/SalesCard";
+import RevenueCard from "../Card/RevenueCard";
 
 const Cards = () => {
     return (
@@ -11,7 +12,10 @@ const Cards = () => {
             <div className="parentContainer" >
                 <SalesCard />
             </div>
-            {cardsData.map((card, id) => {
+            <div className="parentContainer" >
+                <RevenueCard />
+            </div>
+            {/* {cardsData.map((card, id) => {
                 return (
                     <div className="parentContainer" key={id}>
                         <Card
@@ -24,7 +28,7 @@ const Cards = () => {
                         />
                     </div>
                 );
-            })}
+            })} */}
         </div>
     );
 };
