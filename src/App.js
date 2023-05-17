@@ -1,18 +1,28 @@
 import './App.css'
-import MainDash from './components/MainDash/MainDash';
-import Sidebar from './components/Sidebar/Sidebar';
-import RightSide from './components/RightSide/RightSide'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
+import Dashboard from './pages/Dashboard';
 function App() {
   return (
-    <div className="App">
-      <div className="AppGlass">
-        <Sidebar />
-        <MainDash />
-        <RightSide />
-        <div></div>
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/order">
+
+        </Route>
+        <Route path="/menu">
+
+        </Route>
+      </Switch>
+    </Router>
+
   );
 }
 
