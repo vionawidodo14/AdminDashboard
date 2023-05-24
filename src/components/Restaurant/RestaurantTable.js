@@ -57,7 +57,11 @@ export default function MenuTable() {
                 <TableCell>{transactions[id].name}</TableCell>
                 <TableCell align="left">{transactions[id].category}</TableCell>
                 <TableCell align="left">{transactions[id].transactions.join(', ')}</TableCell>
-                <TableCell align="left" className="Details">Edit</TableCell>
+                <TableCell align="left" className="Details">
+                  <Link to={`create-restaurant?id=${id}`}>
+                    <Button variant="contained" >Edit</Button>
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

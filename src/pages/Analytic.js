@@ -1,14 +1,17 @@
 import React from 'react'
+import { Card } from '@mui/material'
+import Cards from '../components/Cards/Cards'
 import Sidebar from '../components/Sidebar/Sidebar'
-import MainDash from '../components/MainDash/MainDash'
-import RightSide from '../components/RightSide/RightSide'
 
-function Dashboard() {
+const Analytics = () => {
   return (
     <div className="App">
       <div className="AppGlass">
         <Sidebar />
-        <MainDash />
+        <div className='MainDash'>
+          <h1>Analytics</h1>
+          <Cards />
+        </div>
         {/* <RightSide /> */}
         <div></div>
       </div>
@@ -16,4 +19,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Analytics

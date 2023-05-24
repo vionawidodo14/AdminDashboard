@@ -40,6 +40,7 @@ export default function RestaurantTable() {
             <TableRow>
               <TableCell>Restaurant</TableCell>
               <TableCell>Title</TableCell>
+              <TableCell align="left">Base Price</TableCell>
               <TableCell align="left">Price</TableCell>
               <TableCell align="left">Category</TableCell>
               <TableCell align="left">Action</TableCell>
@@ -55,9 +56,14 @@ export default function RestaurantTable() {
                   {transactions[id].restaurantName}
                 </TableCell>
                 <TableCell align="left">{transactions[id].title}</TableCell>
+                <TableCell align="left">{transactions[id].basePrice}</TableCell>
                 <TableCell align="left">${transactions[id].price}</TableCell>
                 <TableCell align="left">{transactions[id].category}</TableCell>
-                <TableCell align="left" className="Details">Edit</TableCell>
+                <TableCell align="left" className="Details">
+                  <Link to={`create-menu?id=${id}`}>
+                    <Button variant="contained" >Edit</Button>
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

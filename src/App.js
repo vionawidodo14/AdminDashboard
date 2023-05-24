@@ -13,12 +13,16 @@ import EditMenu from './pages/EditMenu';
 import Restaurant from './pages/Restaurant';
 import CreateRestaurant from './pages/CreateRestaurant';
 import Order from './pages/Order';
+import Analytics from './pages/Analytic';
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route path="/analytics">
+          <Analytics />
         </Route>
         <Route path="/order">
           <Order />

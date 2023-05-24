@@ -7,6 +7,7 @@ import MenuTable from '../components/Menu/MenuTable'
 import { useState } from 'react'
 import { Button, FormControl, FormLabel, Grid, MenuItem, Select, TextField } from '@mui/material'
 import { useParams, useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 
 function CreateMenu() {
   const [formVal, setFormVal] = useState({
@@ -20,22 +21,38 @@ function CreateMenu() {
     basePrice: '',
   })
   const params = useLocation()
+  const parameter = queryString.parse(params.search)
 
 
   const [restaurant, setRestaurant] = useState([])
   const SubmitHandler = async (e) => {
     e.preventDefault()
 
-    const rawResponse = await fetch('https://uber-food-clone-a209f-default-rtdb.firebaseio.com/menu.json', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formVal)
-    });
+    if (parameter.id) {
+      const rawResponse = await fetch(`https://uber-food-clone-a209f-default-rtdb.firebaseio.com/menu/${parameter.id}.json`, {
+        method: 'PATCH',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formVal)
+      });
 
-    alert('Create success')
+      alert('Update success')
+    }
+    else {
+      const rawResponse = await fetch('https://uber-food-clone-a209f-default-rtdb.firebaseio.com/menu.json', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formVal)
+      });
+
+      alert('Create success')
+    }
+
   }
 
   const hanldeInput = (e) => {
@@ -61,8 +78,12 @@ function CreateMenu() {
   }
 
   useEffect(() => {
-    console.log(params);
+
+    if (parameter.id) {
+      fetch(`https://uber-food-clone-a209f-default-rtdb.firebaseio.com/menu/${parameter.id}.json`).then((res) => res.json()).then(json => setFormVal(json));
+    }
   }, [params])
+
   useEffect(() => {
     fetch('https://uber-food-clone-a209f-default-rtdb.firebaseio.com/restaurant.json').then((res) => res.json()).then(json => setRestaurant(json));
   }, [])
@@ -75,7 +96,7 @@ function CreateMenu() {
       <div className="AppGlass">
         <Sidebar />
         <div className='MainDash'>
-          <h1>Create Menu</h1>
+          <h1>  {parameter.id ? 'Edit Menu' : 'Create Menu'}</h1>
           <form onSubmit={SubmitHandler} className="form">
             <Grid container spacing={2}>
               <Grid item xs={12}>
