@@ -22,22 +22,30 @@ export const SidebarData = [
     {
         icon: UilEstate,
         heading: "Dashboard",
+        url: '/dashboard'
     },
     {
         icon: UilClipboardAlt,
         heading: "Orders",
+        url: '/orders'
+
     },
     {
         icon: UilUsersAlt,
-        heading: "Customers",
+        heading: "Restaurant",
+        url: '/restaurant'
+
     },
     {
         icon: UilPackage,
-        heading: 'Products',
+        heading: 'Menu',
+        url: '/menu'
     },
     {
         icon: UilChart,
-        heading: 'Analytics'
+        heading: 'Analytics',
+        url: '/analytics'
+
     }
 ];
 

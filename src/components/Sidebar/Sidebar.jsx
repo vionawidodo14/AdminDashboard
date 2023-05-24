@@ -4,8 +4,11 @@ import './Sidebar.css'
 import { SidebarData } from '../../Data/Data'
 import { UilSignOutAlt } from '@iconscout/react-unicons'
 import { UilEstate } from "@iconscout/react-unicons"
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+    const history = useHistory();
+    const location = useLocation();
 
     const [selected, setSelected] = useState(0)
 
@@ -23,9 +26,12 @@ const Sidebar = () => {
             <div className="menu">
                 {SidebarData.map((item, index) => {
                     return (
-                        <div className={selected === index ? 'menuItem active' : 'menuItem'}
+                        <div className={location.pathname === item.url ? 'menuItem active' : 'menuItem'}
                             key={index}
-                            onClick={() => setSelected(index)}>
+                            onClick={() => {
+                                setSelected(index)
+                                history.push(item.url)
+                            }}>
                             <item.icon />
                             <span>
                                 {item.heading}
