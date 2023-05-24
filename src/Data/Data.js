@@ -27,7 +27,7 @@ export const SidebarData = [
     {
         icon: UilClipboardAlt,
         heading: "Orders",
-        url: '/orders'
+        url: '/order'
 
     },
     {

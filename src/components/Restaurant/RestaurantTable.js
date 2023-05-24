@@ -27,7 +27,7 @@ export default function MenuTable() {
   return (
     <div className="Table">
 
-      <Link to='create-menu'>
+      <Link to='create-restaurant'>
         <Button variant="contained" >Create Restaurant</Button>
       </Link>
       <br /> <br />
