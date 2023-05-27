@@ -78,14 +78,14 @@ function CreateRestaurant() {
   }, [])
 
 
-  const STATICCAT = ['burger', 'pizza', 'bar', 'fastfood']
+  const STATICCAT = ['burger', 'bars', 'italian', 'seafood', 'sushi']
 
   return (
     <div className="App">
       <div className="AppGlass">
         <Sidebar />
         <div className='MainDash'>
-          <h1>Create Restaurant</h1>
+          <h1>{parameter.get('id') ? 'Edit Retaurant' : 'Create Retaurant'}</h1>
           <form onSubmit={SubmitHandler} className="form">
             <Grid container spacing={2}>
               <Grid item xs={12}>

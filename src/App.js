@@ -16,6 +16,7 @@ import CreateRestaurant from './pages/CreateRestaurant';
 import Order from './pages/Order';
 import Analytics from './pages/Analytic';
 import Login from './components/Login/Login';
+import Signup from './components/Login/Signup';
 function App() {
   return (
     <Router>
@@ -26,6 +27,9 @@ function App() {
 
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/signup">
+          <Signup />
         </Route>
         <Route path="/dashboard">
           <Dashboard />

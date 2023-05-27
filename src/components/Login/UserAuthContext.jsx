@@ -4,7 +4,7 @@ import {
     AuthErrorCodes, createUserWithEmailAndPassword, onAuthStateChanged,
     signInWithEmailAndPassword, signOut, getAuth, sendEmailVerification
 } from 'firebase/auth'
-import { auth, db } from "../firebase.config";
+import { auth, db } from "../../firebase";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 

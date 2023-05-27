@@ -1,11 +1,14 @@
 import { AuthErrorCodes } from 'firebase/auth'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from '../Login/UserAuthContext'
-import './Signup.css'
+import { Link, useHistory } from "react-router-dom"
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
+// import './Signup.css'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 const Signup = () => {
-    const navigate = useNavigate()
-    const { SignUp } = useAuth()
+
+    const history = useHistory()
     const [err, setError] = useState("")
     const [user, setUser] = useState({
         email: "",
@@ -24,50 +27,23 @@ const Signup = () => {
 
     const SubmitHandler = async (e) => {
         e.preventDefault()
-        const { email, password, confirmPassword, FullName } = user
-        if (password == "" || confirmPassword == "" || email == "" || FullName == "") {
-            setInterval(() => {
-                setError("")
-            }, 5000)
-            return setError("please fill All the field ")
-        }
-        else if (password !== confirmPassword) {
-            setInterval(() => {
-                setError("")
-            }, 5000)
-            return setError("Password does not match")
-        }
-        else if (!password.length >= 6 || !confirmPassword.length >= 6) {
-            setInterval(() => {
-                setError("")
-            }, 5000)
-            return setError("Password Must be Greater then 6 Length")
-        }
-        else {
-            try {
-                await SignUp(email, password)
-                alert("WellCome New User Create successfully")
-                navigate('/')
-            } catch (err) {
-                if (err.code === "auth/email-already-in-use") {
-                    setInterval(() => {
-                        setError("")
-                    }, 5000)
-                    setError("email already in use try another email")
-                }
-                else if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
 
-                    setInterval(() => {
-                        setError("")
-                    }, 5000)
-                    setError("Password Must be 6 charecter")
-                }
+        await createUserWithEmailAndPassword(auth, user.email, user.password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                alert('Registration Success')
+                history.push('login')
 
-                else {
-                    setError(err.message)
-                }
-            }
-        }
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage)
+                // ..
+            });
+
     }
     return (
 
@@ -78,7 +54,7 @@ const Signup = () => {
 
             }
 
-            <form onSubmit={SubmitHandler} className="form">
+            <form onSubmit={SubmitHandler} className="formlogin">
                 <h2>Registration Form</h2>
                 <div className="inputfield">
                     <input type="text" placeholder="Email" value={user.email} name='email' onChange={UserHandler} />
@@ -91,7 +67,7 @@ const Signup = () => {
                     <input type="password" placeholder="Confirm Password" value={user.confirmPassword} name='confirmPassword' onChange={UserHandler} />
                 </div>
                 <div className="inputfield">
-                    <input type="submit" />
+                    <input type="submit" value="sign up" style={{ color: 'white' }} />
                 </div>
                 <p className="forget">Already Have an account? <Link to={"/"} className="link">{"login"}</Link></p>
             </form>

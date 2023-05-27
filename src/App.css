@@ -25,6 +25,11 @@
   font-family: 'Inter', sans-serif;
 }
 
+* {
+  font-family: 'Inter', sans-serif;
+
+}
+
 .AppGlass {
   display: grid;
   height: 97%;

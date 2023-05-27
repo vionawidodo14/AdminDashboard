@@ -15,7 +15,7 @@ const ExpensesCard = () => {
   const [props, setProps] = useState({
     title: "Expenses",
     color: {
-      backGround: "linear-gradient(180deg, #395cbb 0%, #1b0a88 100%)",
+      backGround: "linear-gradient(180deg, #395cbb 0%, #a193ff 100%)",
       boxShadow: "0px 10px 20px 0px #FDC0C7",
     },
     barValue: 70,
