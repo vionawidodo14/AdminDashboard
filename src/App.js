@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 import React from 'react'
 import Dashboard from './pages/Dashboard';
@@ -14,10 +15,18 @@ import Restaurant from './pages/Restaurant';
 import CreateRestaurant from './pages/CreateRestaurant';
 import Order from './pages/Order';
 import Analytics from './pages/Analytic';
+import Login from './components/Login/Login';
 function App() {
   return (
     <Router>
       <Switch>
+        < Route exact path="/">
+          <Redirect to='/dashboard' />
+        </Route>
+
+        <Route path="/login">
+          <Login />
+        </Route>
         <Route path="/dashboard">
           <Dashboard />
         </Route>

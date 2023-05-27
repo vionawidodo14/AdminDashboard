@@ -11,10 +11,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import ConfirmModal from "../ConfirmModal";
 
 export default function MenuTable() {
 
   const [transactions, setTransactions] = useState({})
+
+  const [deleteModal, setDeleteModal] = useState(false)
+  const [selected, setSelected] = useState(null)
   useEffect(() => {
     fetchData()
   }, [])
@@ -24,6 +28,19 @@ export default function MenuTable() {
   }
 
 
+  const deleteData = async () => {
+    const rawResponse = await fetch(`https://uber-food-clone-a209f-default-rtdb.firebaseio.com/restaurant/${selected}.json`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    setSelected(null)
+    setDeleteModal(false)
+    fetchData()
+    alert('Delete success')
+  }
   return (
     <div className="Table">
 
@@ -61,12 +78,21 @@ export default function MenuTable() {
                   <Link to={`create-restaurant?id=${id}`}>
                     <Button variant="contained" >Edit</Button>
                   </Link>
+                  <Button style={{ marginLeft: 4 }} variant="contained" onClick={() => {
+                    setDeleteModal(true)
+                    setSelected(id)
+                  }}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+
+      <ConfirmModal open={deleteModal} desc={'this action cannot be undone'} title={'Are you sure want to delete?'} onCancel={() => {
+        setDeleteModal(false)
+        setSelected(null)
+      }} onFinish={deleteData} />
     </div>
   );
 }

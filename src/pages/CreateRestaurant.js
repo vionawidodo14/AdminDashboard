@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { Button, FormControl, FormLabel, Grid, MenuItem, Select, TextField } from '@mui/material'
 import { useParams, useLocation } from 'react-router-dom'
 import dayjs from 'dayjs'
-import queryString from 'query-string'
+import useQuery from '../components/useQuery'
 
 function CreateRestaurant() {
   const [formVal, setFormVal] = useState({
@@ -22,15 +22,15 @@ function CreateRestaurant() {
     category: '',
   })
   const params = useLocation()
-  const parameter = queryString.parse(params.search)
+  let parameter = useQuery();
 
   const [restaurant, setRestaurant] = useState([])
   const SubmitHandler = async (e) => {
     e.preventDefault()
     const mapped = { ...formVal, transactions: [formVal.transactions] }
 
-    if (parameter.id) {
-      const rawResponse = await fetch(`https://uber-food-clone-a209f-default-rtdb.firebaseio.com/restaurant/${parameter.id}.json`, {
+    if (parameter.get('id')) {
+      const rawResponse = await fetch(`https://uber-food-clone-a209f-default-rtdb.firebaseio.com/restaurant/${parameter.get('id')}.json`, {
         method: 'PATCH',
         headers: {
           'Accept': 'application/json',
@@ -68,8 +68,8 @@ function CreateRestaurant() {
   }
   useEffect(() => {
 
-    if (parameter.id) {
-      fetch(`https://uber-food-clone-a209f-default-rtdb.firebaseio.com/restaurant/${parameter.id}.json`).then((res) => res.json()).then(json => setFormVal({ ...json, transactions: json.transactions[0] }));
+    if (parameter.get('id')) {
+      fetch(`https://uber-food-clone-a209f-default-rtdb.firebaseio.com/restaurant/${parameter.get('id')}.json`).then((res) => res.json()).then(json => setFormVal({ ...json, transactions: json.transactions[0] }));
     }
   }, [params])
   useEffect(() => {
