@@ -5,12 +5,25 @@ import { SidebarData } from '../../Data/Data'
 import { UilSignOutAlt } from '@iconscout/react-unicons'
 import { UilEstate } from "@iconscout/react-unicons"
 import { Link, useHistory, useLocation } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Sidebar = () => {
     const history = useHistory();
     const location = useLocation();
 
     const [selected, setSelected] = useState(0)
+
+
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            history.push("/login");
+            alert("Signed out successfully")
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
 
     return (
         <div className="Sidebar">
@@ -41,7 +54,7 @@ const Sidebar = () => {
                 })}
 
                 {/* signoutIcon */}
-                <div className="menuItem">
+                <div className="menuItem" onClick={handleLogout}>
                     <UilSignOutAlt />
                 </div>
             </div>

@@ -6,6 +6,7 @@ import Table from '../components/Table/Table'
 import MenuTable from '../components/Menu/MenuTable'
 import { useState } from 'react'
 import { Button, FormControl, FormLabel, Grid, MenuItem, Select, TextField } from '@mui/material'
+import MainContainer from '../components/MainContainer'
 
 function EditMenu() {
   const [formVal, setFormVal] = useState({
@@ -44,61 +45,59 @@ function EditMenu() {
     }
   ]
   return (
-    <div className="App">
-      <div className="AppGlass">
-        <Sidebar />
-        <div className='MainDash'>
-          <h1>Edit Menu</h1>
-          <form onSubmit={SubmitHandler} className="form">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <FormControl>
-                  <FormLabel>Restaurant Name</FormLabel>
-                  <Select
-                    size='small'
-                    style={{ width: 500 }}
-                    value={formVal.restauranID}
-                    onChange={hanldeInput}
-                  >
-                    {STATICMENU.map(i => <MenuItem value={i.id}>{i.name}</MenuItem>)}
-                  </Select>
+    <MainContainer>
+      <Sidebar />
+      <div className='MainDash'>
+        <h1>Edit Menu</h1>
+        <form onSubmit={SubmitHandler} className="form">
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <FormControl>
+                <FormLabel>Restaurant Name</FormLabel>
+                <Select
+                  size='small'
+                  style={{ width: 500 }}
+                  value={formVal.restauranID}
+                  onChange={hanldeInput}
+                >
+                  {STATICMENU.map(i => <MenuItem value={i.id}>{i.name}</MenuItem>)}
+                </Select>
 
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Menu Title</FormLabel>
-                  <TextField style={{ width: 500 }} name='title' variant="outlined" size='small' onChange={hanldeInput} value={formVal.title} />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Price</FormLabel>
-                  <TextField style={{ width: 500 }} name='price' variant="outlined" type='number' size='small' onChange={hanldeInput} value={formVal.price} />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Category</FormLabel>
-                  <TextField style={{ width: 500 }} name='category' variant="outlined" size='small' onChange={hanldeInput} value={formVal.category} />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <div className="inputfield">
-                  <Button type='submit' variant="contained">Submit</Button>
-                </div>
-              </Grid>
-
+              </FormControl>
             </Grid>
-          </form>
-        </div>
-        {/* <RightSide /> */}
-        <div></div>
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Menu Title</FormLabel>
+                <TextField style={{ width: 500 }} name='title' variant="outlined" size='small' onChange={hanldeInput} value={formVal.title} />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Price</FormLabel>
+                <TextField style={{ width: 500 }} name='price' variant="outlined" type='number' size='small' onChange={hanldeInput} value={formVal.price} />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Category</FormLabel>
+                <TextField style={{ width: 500 }} name='category' variant="outlined" size='small' onChange={hanldeInput} value={formVal.category} />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="inputfield">
+                <Button type='submit' variant="contained">Submit</Button>
+              </div>
+            </Grid>
+
+          </Grid>
+        </form>
       </div>
-    </div>
+      {/* <RightSide /> */}
+      <div></div>
+    </MainContainer>
   )
 }
 

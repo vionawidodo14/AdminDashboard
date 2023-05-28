@@ -9,6 +9,7 @@ import { Button, FormControl, FormLabel, Grid, MenuItem, Select, TextField } fro
 import { useParams, useLocation } from 'react-router-dom'
 import dayjs from 'dayjs'
 import useQuery from '../components/useQuery'
+import MainContainer from '../components/MainContainer'
 
 function CreateRestaurant() {
   const [formVal, setFormVal] = useState({
@@ -81,99 +82,98 @@ function CreateRestaurant() {
   const STATICCAT = ['burger', 'bars', 'italian', 'seafood', 'sushi']
 
   return (
-    <div className="App">
-      <div className="AppGlass">
-        <Sidebar />
-        <div className='MainDash'>
-          <h1>{parameter.get('id') ? 'Edit Retaurant' : 'Create Retaurant'}</h1>
-          <form onSubmit={SubmitHandler} className="form">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <FormControl>
-                  <FormLabel>Restaurant Name</FormLabel>
-                  <TextField style={{ width: 500 }} name='name' variant="outlined" size='small' onChange={hanldeInput} value={formVal.name} />
-                </FormControl>
-              </Grid>
+    <MainContainer>
 
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Address</FormLabel>
-                  <TextField style={{ width: 500 }} name='address' variant="outlined" size='small' onChange={hanldeInput} value={formVal.address} />
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Transactions</FormLabel>
-                  <Select
-                    size='small'
-                    style={{ width: 500 }}
-                    value={formVal.transactions}
-                    onChange={hanldeInput}
-                    name='transactions'
-                  >
-                    <MenuItem value='delivery'>delivery</MenuItem>)
-                    <MenuItem value='pickup'>pickup</MenuItem>)
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Price</FormLabel>
-                  <Select
-                    size='small'
-                    style={{ width: 500 }}
-                    value={formVal.price}
-                    onChange={hanldeInput}
-                    name='price'
-                  >
-                    <MenuItem value='$'>$</MenuItem>)
-                    <MenuItem value='$$'>$$</MenuItem>)
-                    <MenuItem value='$$$'>$$$</MenuItem>)
-                    <MenuItem value='$$$$'>$$$$</MenuItem>)
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Image URL</FormLabel>
-                  <TextField style={{ width: 500 }} name='image_url' variant="outlined" size='small' onChange={hanldeInput} value={formVal.image_url} />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-
-                <FormControl>
-                  <FormLabel>Category</FormLabel>
-                  <Select
-                    size='small'
-                    style={{ width: 500 }}
-                    value={formVal.category}
-                    onChange={hanldeInput}
-                    name='category'
-                  >
-                    {STATICCAT.map((val) => <MenuItem value={val}>{val}</MenuItem>)}
-                  </Select>
-
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <div className="inputfield">
-                  <Button type='submit' variant="contained">Submit</Button>
-                </div>
-              </Grid>
-
+      <Sidebar />
+      <div className='MainDash'>
+        <h1>{parameter.get('id') ? 'Edit Retaurant' : 'Create Retaurant'}</h1>
+        <form onSubmit={SubmitHandler} className="form">
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <FormControl>
+                <FormLabel>Restaurant Name</FormLabel>
+                <TextField style={{ width: 500 }} name='name' variant="outlined" size='small' onChange={hanldeInput} value={formVal.name} />
+              </FormControl>
             </Grid>
-          </form>
-        </div>
-        {/* <RightSide /> */}
-        <div></div>
+
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Address</FormLabel>
+                <TextField style={{ width: 500 }} name='address' variant="outlined" size='small' onChange={hanldeInput} value={formVal.address} />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Transactions</FormLabel>
+                <Select
+                  size='small'
+                  style={{ width: 500 }}
+                  value={formVal.transactions}
+                  onChange={hanldeInput}
+                  name='transactions'
+                >
+                  <MenuItem value='delivery'>delivery</MenuItem>)
+                  <MenuItem value='pickup'>pickup</MenuItem>)
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Price</FormLabel>
+                <Select
+                  size='small'
+                  style={{ width: 500 }}
+                  value={formVal.price}
+                  onChange={hanldeInput}
+                  name='price'
+                >
+                  <MenuItem value='$'>$</MenuItem>)
+                  <MenuItem value='$$'>$$</MenuItem>)
+                  <MenuItem value='$$$'>$$$</MenuItem>)
+                  <MenuItem value='$$$$'>$$$$</MenuItem>)
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Image URL</FormLabel>
+                <TextField style={{ width: 500 }} name='image_url' variant="outlined" size='small' onChange={hanldeInput} value={formVal.image_url} />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+
+              <FormControl>
+                <FormLabel>Category</FormLabel>
+                <Select
+                  size='small'
+                  style={{ width: 500 }}
+                  value={formVal.category}
+                  onChange={hanldeInput}
+                  name='category'
+                >
+                  {STATICCAT.map((val) => <MenuItem value={val}>{val}</MenuItem>)}
+                </Select>
+
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="inputfield">
+                <Button type='submit' variant="contained">Submit</Button>
+              </div>
+            </Grid>
+
+          </Grid>
+        </form>
       </div>
-    </div>
+      {/* <RightSide /> */}
+      <div></div>
+    </MainContainer>
   )
 }
 

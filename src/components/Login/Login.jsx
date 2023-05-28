@@ -3,9 +3,11 @@ import './Signup.css'
 import { Link } from "react-router-dom"
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
     // const fbAuth = useAuth()
+    const history = useHistory()
     const [err, setError] = useState("")
     const [user, setUser] = useState({
         email: "",
@@ -28,7 +30,7 @@ const Login = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                // navigate("/home")
+                history.push('/dashboard')
                 console.log(user);
             })
             .catch((error) => {
